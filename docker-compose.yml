@@ -3,16 +3,42 @@ version: "3.8"
 services:
   notification:
     build:
-      context: .
+      context: ./notification-svc
       dockerfile: Dockerfile
     image: notification-svc
     container_name: notification-svc
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/app
+      - ./notification-svc:/usr/src/app
       - /usr/src/app/node_modules
     environment:
       - NODE_ENV=development
+    networks:
+      - app-network
+    depends_on:
+      - postgres-noti
     stdin_open: true
     tty: true
+
+  postgres-noti:
+    image: postgres:15
+    container_name: postgres-svc
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
