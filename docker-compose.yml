@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  notification:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: notification-svc
+    container_name: notification-svc
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
