@@ -31,4 +31,9 @@ export class AlarmController {
   findAll() {
     return this.alarmService.findAll();
   }
+
+  @Patch(":id/acknowledge")
+  acknowledge(@Param('id') id: string) {
+    return this.alarmService.acknowledge(id)
+  }
 }
