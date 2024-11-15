@@ -6,9 +6,10 @@ import { CoreModule } from './modules/core/core.module';
 import { ApplicationBootstrapOptions } from './common/interfaces/application-bootstrap-options.interface';
 import { AlarmsInfrastructureModule } from './modules/alarm/infrastructure/alarms-infrastructure.module';
 import { CqrsModule } from '@nestjs/cqrs';
+import { SharedModule } from './modules/shared/shared.module';
 
 @Module({
-  imports: [CqrsModule.forRoot(), CoreModule],
+  imports: [CqrsModule.forRoot(), CoreModule, SharedModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -46,6 +46,19 @@ services:
     networks:
       - app-network
 
+  mongo-event-store:
+    image: mongo
+    container_name: mongo-event-store-svc
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_DB: event-stored
+    command: mongod --replSet event-store-repl-set
+    volumes:
+      - ./notification-svc/scripts/event-store-mongoinit.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - app-network
+
 volumes:
   postgres_data:
 
