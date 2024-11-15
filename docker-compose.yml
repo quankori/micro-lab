@@ -36,6 +36,16 @@ services:
     networks:
       - app-network
 
+  mongo-noti:
+    image: mongo
+    container_name: mongo-svc
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_DB: mydatabase
+    networks:
+      - app-network
+
 volumes:
   postgres_data:
 

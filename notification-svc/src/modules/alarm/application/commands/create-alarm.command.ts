@@ -1,6 +1,11 @@
 export class CreateAlarmCommand {
   constructor(
-    public name: string,
-    public severity: string,
+    public readonly name: string,
+    public readonly severity: string,
+    public readonly triggeredAt: Date,
+    public readonly items: Array<{
+      name: string;
+      type: string;
+    }>,
   ) {}
 }
