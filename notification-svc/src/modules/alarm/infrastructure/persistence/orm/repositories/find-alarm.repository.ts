@@ -6,7 +6,7 @@ import { Model } from 'mongoose';
 import { AlarmReadModel } from 'src/modules/alarm/domain/read-models/alarm.read-model';
 
 @Injectable()
-export class OrmAlarmRepository implements FindAlarmRepository {
+export class OrmFindAlarmRepository implements FindAlarmRepository {
   constructor(
     @InjectModel(MaterializedAlarmView.name)
     private readonly alarmModel: Model<MaterializedAlarmView>,

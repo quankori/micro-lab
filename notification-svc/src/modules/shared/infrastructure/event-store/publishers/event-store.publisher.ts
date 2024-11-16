@@ -35,7 +35,7 @@ export class EventStorePublisher
       .map((event) => this.eventSerializer.serialize(event, dispatcher))
       .map((serializableEvent, index) => ({
         ...serializableEvent,
-        position: dispatcher.version.value + index + 1,
+        position: dispatcher.getVersion().value + index + 1,
       }));
 
     return this.eventStore.persist(serializableEvents);

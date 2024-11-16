@@ -16,7 +16,7 @@ export class EventSerializer {
     const aggregateId = dispatcher.id;
     return {
       streamId: aggregateId,
-      position: dispatcher.version.value + 1,
+      position: dispatcher.getVersion().value + 1,
       type: eventType,
       data: this.toJSON(event),
     };
