@@ -1,16 +1,16 @@
-version: "3.8"
+version: '3.8'
 
 services:
   notification:
     build:
-      context: ./notification-svc
+      context: .
       dockerfile: Dockerfile
     image: notification-svc
     container_name: notification-svc
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
-      - ./notification-svc:/usr/src/app
+      - .:/usr/src/app
       - /usr/src/app/node_modules
     environment:
       - NODE_ENV=development
@@ -26,7 +26,7 @@ services:
     container_name: postgres-svc
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
@@ -40,7 +40,7 @@ services:
     image: mongo
     container_name: mongo-svc
     ports:
-      - "27017:27017"
+      - '27017:27017'
     environment:
       MONGO_DB: mydatabase
     networks:
@@ -50,12 +50,12 @@ services:
     image: mongo
     container_name: mongo-event-store-svc
     ports:
-      - "27018:27017"
+      - '27018:27017'
     environment:
       MONGO_DB: event-stored
     command: mongod --replSet event-store-repl-set
     volumes:
-      - ./notification-svc/scripts/event-store-mongoinit.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./scripts/event-store-mongoinit.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - app-network
 
