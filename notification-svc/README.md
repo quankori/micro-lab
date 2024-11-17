@@ -1,99 +1,132 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# DDD + CQRS Architecture with NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## **1. Introduction**
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project implements the **Domain-Driven Design (DDD)** architecture combined with **Command Query Responsibility Segregation (CQRS)** in **NestJS**. This architecture clearly separates write operations (Commands) from read operations (Queries), enhancing the scalability and maintainability of the application.
 
-## Description
+## **2. Prerequisites**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Before getting started, ensure you have the following tools installed:
 
-## Project setup
+- **Node.js** (>=20.x)
+- **npm** or **yarn**
+- **NestJS CLI**
+
+### **a. Install NestJS CLI**
+
+Using npm:
 
 ```bash
-$ yarn install
+npm install -g @nestjs/cli
 ```
 
-## Compile and run the project
+Or using yarn:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+yarn global add @nestjs/cli
 ```
 
-## Run tests
+## **3. Installation**
+
+### **a. Clone Repository**
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+git clone https://github.com/quankori/micro-lab
+cd micro-lab/notification-svc
 ```
 
-## Deployment
+### **b. Install Dependencies**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Using npm:
 
 ```bash
-$ yarn install -g mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Or using yarn:
 
-## Resources
+```bash
+yarn install
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+Using docker:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+docker compose up
+```
 
-## Support
+## **4. DDD + CQRS Architecture**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### **a. Project Structure**
 
-## Stay in touch
+- **Controllers**: Receive requests from the Client and forward them to the application services.
+- **Application Services**: Contain the logic for handling Commands and Queries.
+- **Domain**: Contains Entities, Value Objects, Aggregates, and Domain Events.
+- **Infrastructure**: Interacts with the database, event store, and external services.
+- **Shared**: Contains shared components such as decorators, interfaces, and utilities.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### **b. Command Flow**
 
-## License
+1. **Client**: Sends a command via the API.
+2. **Controller**: Receives the command from the Client and forwards it to the **Command Service**.
+3. **Command Service**: Processes the command and dispatches it to the **Command Handler**.
+4. **Command Handler**: Utilizes the **Factory (Domain)** to create or update the **Aggregate Root**.
+5. **Aggregate Root**: Manages the state of the Aggregate and applies domain events.
+6. **Apply Event**: Generates an event within the Aggregate.
+7. **Commit Event**: Records the event to the event store.
+8. **Persist Event**: Stores the event in MongoDB through the **Mongo Event Store**.
+9. **Mongo Event Store**: Saves the events and notifies changes via the **Event Bridge**.
+10. **Event Bridge**: Listens for new events and publishes them to the **Event Handler**.
+11. **Event Handler**: Receives the event from the **Event Bridge** and processes it by interacting with the **Repository** to update data.
+12. **Repository (MongoDB)**: Directly interacts with the MongoDB database to store or retrieve actual data.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### **c. Query Flow**
+
+1. **Client**: Sends a query via the API.
+2. **Controller**: Receives the query from the Client and forwards it to the **Query Service**.
+3. **Query Service**: Processes the query and dispatches it to the **Query Handler**.
+4. **Query Handler**: Interacts with the **Repository (MongoDB)** to retrieve data.
+5. **Repository (MongoDB)**: Fetches data from MongoDB and returns it to the **Query Handler**.
+6. **Controller**: Returns the queried data to the Client.
+
+## **5. Running the Application**
+
+### **a. Run in Development Mode**
+
+Using npm:
+
+```bash
+npm run start:dev
+```
+
+Or using yarn:
+
+```bash
+yarn start:dev
+```
+
+Or using docker:
+
+```bash
+docker compose up
+```
+
+The application will run on `http://localhost:3000`.
+
+### **b. Build and Run the Application**
+
+To build the application:
+
+```bash
+npm run build
+```
+
+## **6. Conclusion**
+
+The **DDD + CQRS** architecture in NestJS effectively separates write and read operations, enhancing the scalability and maintainability of the application. By utilizing components such as **Command Handlers**, **Event Handlers**, and **Mongo Event Store**, you can build a robust and flexible system.
+
+### **Benefits of DDD + CQRS Architecture**
+
+1. **Separation of Concerns**: Clearly separates commands and queries, making the system easier to scale and maintain.
+2. **Enhanced Scalability**: Components can be scaled independently without affecting each other.
+3. **Event Management**: Event Sourcing allows tracking historical changes and recreating the current state of Aggregates.
